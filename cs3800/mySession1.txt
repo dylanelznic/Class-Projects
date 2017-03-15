@@ -1,0 +1,74 @@
+Script started on Thu 09 Feb 2017 11:33:15 PM CST
+]0;djey96@rc11xcs213: ~/SDRIVE/cs3800djey96@rc11xcs213:~/SDRIVE/cs3800$ ./dylanElznicHW1.sh
+WELCOME
+---------------------------------------------------------
+select a menu option
+1- ancestry history
+2- who is online
+3- what process any user is running
+4- exit
+1
+
+THE ANCESTRY TREE FOR CURRENT PROCESS IS....
+
+22697	/bin/bash
+ |
+22679	bash
+ |
+22678	script
+ |
+22645	-bash
+ |
+22644	sshd:
+ |
+22451	sshd:
+ |
+7137	/usr/sbin/sshd
+ |
+1	/lib/systemd/systemd
+
+select a menu option
+1- ancestry history
+2- who is online
+3- what process any user is running
+4- exit
+2
+
+aln8v6 bmct33 djey96 jkpxb6 jmkzpd jsh5y3 mhrh3
+
+select a menu option
+1- ancestry history
+2- who is online
+3- what process any user is running
+4- exit
+3
+
+Select a currently online user to view his processes: (Type in their username)
+     1	aln8v6
+     2	bmct33
+     3	djey96
+     4	jkpxb6
+     5	jmkzpd
+     6	jsh5y3
+     7	mhrh3
+
+mhrh3
+4 S root      6336  7137 TS   19 - 45582 -      19:47 ?        00:00:00 sshd: mhrh3 [priv]
+5 S mhrh3     6346     1 TS   19 - 12125 -      19:47 ?        00:00:00 /usr/bin/perl /usr/bin/dfshack /mnt/dfs/mhrh3/Users/mhrh3 /nethome/users/mhrh3 -o nonempty,dev,suid
+4 S mhrh3     6356     1 TS   19 - 12381 -      19:47 ?        00:00:00 /lib/systemd/systemd --user
+5 S mhrh3     6361  6356 TS   19 - 38949 -      19:47 ?        00:00:00 (sd-pam)
+5 S mhrh3     6428  6336 TS   19 - 45582 -      19:47 ?        00:00:00 sshd: mhrh3@pts/3
+4 S mhrh3     6429  6428 TS   19 -  7960 -      19:47 pts/3    00:00:00 -bash
+0 S djey96   22750 22697 TS   19 -  4143 pipe_w 23:33 pts/2    00:00:00 grep mhrh3
+
+
+select a menu option
+1- ancestry history
+2- who is online
+3- what process any user is running
+4- exit
+4
+]0;djey96@rc11xcs213: ~/SDRIVE/cs3800djey96@rc11xcs213:~/SDRIVE/cs3800$ exit
+exit
+
+Script done on Thu 09 Feb 2017 11:34:02 PM CST

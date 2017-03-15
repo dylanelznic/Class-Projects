@@ -1,0 +1,7 @@
+4 S root      6336  7137 TS   19 - 45582 -      19:47 ?        00:00:00 sshd: mhrh3 [priv]
+5 S mhrh3     6346     1 TS   19 - 12125 -      19:47 ?        00:00:00 /usr/bin/perl /usr/bin/dfshack /mnt/dfs/mhrh3/Users/mhrh3 /nethome/users/mhrh3 -o nonempty,dev,suid
+4 S mhrh3     6356     1 TS   19 - 12381 -      19:47 ?        00:00:00 /lib/systemd/systemd --user
+5 S mhrh3     6361  6356 TS   19 - 38949 -      19:47 ?        00:00:00 (sd-pam)
+5 S mhrh3     6428  6336 TS   19 - 45582 -      19:47 ?        00:00:00 sshd: mhrh3@pts/3
+4 S mhrh3     6429  6428 TS   19 -  7960 -      19:47 pts/3    00:00:00 -bash
+0 S djey96   22750 22697 TS   19 -  4143 pipe_w 23:33 pts/2    00:00:00 grep mhrh3
