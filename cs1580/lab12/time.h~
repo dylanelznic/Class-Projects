@@ -1,0 +1,33 @@
+//Programmer: Dylan Elznic   Section: C
+//File: time.h
+//Description: Header file for time.cpp
+
+#ifndef TIME_H
+#define TIME_H
+
+const int MAX_HR_IN = 12;
+const int MAX_MIN_IN = 59;
+const int MAX_SEC_IN = 59;
+
+const int TRANSSEC = 60;
+const int TRANSMIN = 60;
+const int TRANSHR = 13;
+
+const int FRSHSEC = 0;
+const int FRSHMIN = 0;
+const int FRSHHR = 1;
+
+class Time
+{
+  public:
+    void read_in();
+    void print_out();
+    void nextSecond();
+  
+  private:
+    int m_hour;
+    int m_minute;
+    int m_second;
+};
+
+#endif
