@@ -1,0 +1,291 @@
+//Dylan Elznic
+//CS 1510 Section 1B
+
+#include <iostream>
+using namespace std;
+
+template<typename T>
+class ArrayList;
+
+//  Big 3 Member Functions
+
+template<typename T>
+ArrayList<T>::~ArrayList()
+{
+	delete []m_data;
+	m_data = NULL;
+	m_size = 0;
+	m_max = 0;
+}
+
+template<typename T>
+ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& rhs)
+{
+	if(this != &rhs)
+	{
+		delete []m_data;
+		m_size = rhs.m_size;
+		m_max = rhs.m_max;
+		m_data = new T[m_max];
+		for(int i = 0; i < m_size; i++)
+		{
+			m_data[i] = rhs.m_data[i];
+		}
+	}
+	
+	return *this;
+}
+
+template<typename T>
+ArrayList<T>::ArrayList(const ArrayList<T>& cpy)
+{
+	m_size = cpy.m_size;
+	m_max = cpy.m_max;
+	*this = cpy;
+}
+
+
+// Basic Accessor Operations
+
+template<typename T>
+int ArrayList<T>::size() const
+{
+	return m_size;
+}
+
+template<typename T>
+const T& ArrayList<T>::first()const
+{
+	return m_data[0];
+}
+
+
+template<typename T>
+T& ArrayList<T>::operator[](int i)
+{
+	if(i < 0 || i >= m_max)
+	{
+        cout<<"!-- ERROR : PANIC in ARRAYLIST!!"<<endl;
+		return m_errobj;
+	}
+	
+	else
+	{
+		return m_data[i];
+	}
+}
+
+template<typename T>
+int ArrayList<T>::find(const T& x)
+{
+	int k = 0;
+	int pos = 0;
+	while(k < m_size)
+	{
+		if(x == m_data[k])
+		{
+			pos = k;
+		}
+		k++;
+	}
+	
+	if(pos == 0 && x != m_data[0])
+	{
+		pos = -1;
+	}
+	
+	return pos;
+}
+
+// Basic Mutator Operations
+
+template<typename T>
+void ArrayList<T>::clear()
+{
+	delete[]m_data;
+	m_data = NULL;
+	m_size = 0;
+	m_max = 0;
+}
+
+template<typename T>
+void ArrayList<T>::insert_back(const T& x)
+{
+	
+	m_size++;
+	if(m_size >= m_max)
+	{
+		T* temp = new T[m_size];
+		for(int i = 0; i < m_max; i++)
+		{
+			temp[i] = m_data[i];
+		}
+		m_max = m_size;
+		m_max = m_max*2;
+		delete []m_data;
+		m_data = new T[m_max];
+		for(int i = 0; i < m_size; i++)
+		{
+			m_data[i] = temp[i];
+		}
+		delete []temp;
+		temp = NULL;
+	}
+	m_data[m_size-1] = x;
+	
+	return;
+}
+
+template<typename T>
+void ArrayList<T>::insert(const T& x, int i)
+{
+	if(i < 0 || i >= m_max)
+	{
+		cout<<"!-- ERROR : PANIC in ARRAYLIST!!"<<endl;
+	}
+	
+	else
+	{
+		m_size++;
+		if(m_size >= m_max)
+		{
+			T* temp = new T[m_size];
+			for(int i = 0; i < m_max; i++)
+			{
+				temp[i] = m_data[i];
+			}
+			m_max = m_size;
+			m_max = m_max*2;
+			delete []m_data;
+			m_data = new T[m_max];
+			for(int i = 0; i < m_size; i++)
+			{
+				m_data[i] = temp[i];
+			}
+			delete []temp;
+			temp = NULL;
+		}
+		
+	    for(int k = m_size; k > i; k--)
+	    {
+			m_data[k] = m_data[k-1];
+		}
+		m_data[i] = x;
+		
+	}
+	
+	return;
+}
+
+template<typename T>
+void ArrayList<T>::remove(int i)
+{
+	if(i < 0 || i >= m_size)
+	{
+		cout<<"!-- ERROR : PANIC in ARRAYLIST!!"<<endl;
+	}
+	
+	else
+	{
+		for(int k = i; k < m_size; k++)
+		{
+			m_data[k] = m_data[k+1];
+		}
+		
+		m_size--;
+		
+		if(m_size <= (m_max/4))
+		{
+			T* temp = new T[m_size];
+			for(int j = 0; j < m_size; j++)
+			{
+				temp[j] = m_data[j];
+			}
+			delete []m_data;
+			m_data = new T[m_max/2];
+			for(int n = 0; n < m_size; n++)
+			{
+				m_data[n] = temp[n];
+			}
+			m_max = m_max/2;
+			delete []temp;
+			temp = NULL;
+		}
+	}
+	
+	return;
+}
+
+// Complex Mutator Operations
+
+template<typename T>
+void ArrayList<T>::swap(int i, int k)
+{
+	if((i < 0 || i >= m_size) || (k < 0 || k >= m_size))
+	{
+		cout<<"!-- ERROR : PANIC in ARRAYLIST!!"<<endl;
+	}
+	
+	else
+	{
+		T* temp = new T;
+		*temp = m_data[i];
+		m_data[i] = m_data[k];
+		m_data[k] = *temp;
+		delete temp;
+		temp = NULL;
+		return;
+	}
+	
+	return;
+	
+}
+
+template<typename T>
+void ArrayList<T>::append(const ArrayList<T>& alist)
+{
+	T*temp = new T[m_size];
+	for(int i = 0; i < m_size; i++)
+	{
+		temp[i] = m_data[i];
+	}
+	delete []m_data;
+	
+	m_data = new T[m_max + alist.m_max];
+	for(int j = 0; j < m_size; j++)
+	{
+		m_data[j] = temp[j];
+	}
+	
+	int n = 0;
+	for(int k = m_size; k < m_size+alist.m_size; k++)
+	{
+			m_data[k] = alist.m_data[n];
+			n++;
+	}
+	m_size = m_size + alist.m_size;
+	m_max = m_max + alist.m_max;
+	
+	delete []temp;
+	temp = NULL;
+	
+	return;
+}
+
+template<typename T>
+void ArrayList<T>::purge()
+{
+	for(int i = 0; i < m_size; i++)
+	{
+		for(int j = i+1; j < m_size; j++)
+		{
+			if(m_data[i] == m_data[j])
+			{
+				remove(j);
+			}
+		}
+	}
+	
+	return;
+}
+
