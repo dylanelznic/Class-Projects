@@ -1,0 +1,111 @@
+//Programmers: Ryan Stoughton & Dylan Elznic //Section: A
+//File: autodiag.cpp
+//Description: This program searches for keywords in a patient's complaint,
+//             and returns an automated prognosis.
+
+#include "autodiag.h"
+#include <iostream>
+#include <sstream>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+  srand(time(NULL));
+ 
+  //Variables 
+  string complaint;
+  int numChars = 0;
+  int numWords = 1;
+  string complaintWords[MAX_WORDS];
+  //char complaintChars[MAX_CHARS];
+  bool is_head = false, is_torso = false,
+       is_hand = false, is_nose = false,  
+       is_leg = false, again = true;  
+  char againchar;
+  ifstream in;
+  
+  //Process
+  greeting();
+
+  while(again == true)
+  {
+    readComplaint(complaint);
+  
+    numChars = getLength(complaint);
+
+    getWords(complaint, numChars, numWords);
+
+    sortWords(complaint, complaintWords, numChars);
+    // strcpy(complaintChars, complaint.c_str());
+    
+    keywordSearch(complaint.c_str(), numChars,
+                  is_head, is_torso, is_hand,
+                  is_nose, is_leg);
+
+    wordFeedback(complaintWords, numWords);
+    
+    if(is_head == true)
+    { 
+      headDiag(in);
+    }
+    else if(is_torso == true)
+    {
+      torsoDiag(in);
+    }
+    else if(is_hand == true)
+    {
+      handDiag(in);
+    }
+    else if(is_nose == true)
+    {
+      noseDiag(in);
+    }
+    else if(is_leg == true)
+    {
+      legDiag(in);
+    }
+    else
+    {
+      cout<<" Take 2 Aspirin and get some sleep."<<endl;
+    }
+  
+    pillPerscription(numWords);
+  
+    scriptDiag(in);
+ 
+    getSurgery(in);
+  
+    cout<<endl<<endl<<"Again?(y,n): ";
+    cin>>againchar;
+    bool correct = false;
+    do
+    {
+    if(againchar == 'n' || againchar == 'N')
+    {  
+      again = false;
+      cout<<endl;
+      correct = true;
+    }
+    else if(againchar != 'Y' && againchar != 'y')
+    {
+      cout<<endl<<"Huh?(y,n): ";
+      cin>>againchar;
+      cout<<endl<<endl;
+    }
+    else
+    {
+      cin.ignore(500, '\n');
+      correct = true;
+    }
+    } while(!correct);
+  }
+  
+  closing();
+
+  return 0;
+}

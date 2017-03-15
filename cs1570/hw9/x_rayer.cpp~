@@ -1,0 +1,25 @@
+//Programmer: Dylan Elznic
+
+#include "x_rayer.h"
+#include "patient.h"
+#include <iostream>
+using namespace std;
+
+void x_rayer::setCost(const int cost)
+{
+  m_cost_per_use = cost;
+  return;
+}
+
+void x_rayer::setNumUse(const int numUses)
+{
+  m_num_uses = numUses;
+  return;
+}
+
+void x_rayer::apply(patient & pat)
+{
+  if(rand()%100 <= 10)
+    pat.m_condition = pat.m_condition/2;
+  return;
+}

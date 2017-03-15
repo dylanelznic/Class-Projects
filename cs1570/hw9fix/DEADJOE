@@ -1,0 +1,22 @@
+
+*** These modified files were found in JOE when it aborted on Wed Nov 19 21:56:02 2014
+*** JOE was aborted by UNIX signal 1
+
+*** File '(Unnamed)'
+surgery
+seekg
+seekg
+cost
+
+*** File '(Unnamed)'
+x_rayer.h
+x_rayer.h
+x_rayer.cpp
+x_rayer.cpp
+driver.cpp
+driver.cpp
+patient.h
+driver.cpp
+driver.cpp
+patient.cpp
+x_rayer.h

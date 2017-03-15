@@ -1,0 +1,59 @@
+//Dylan Elznic  //Section 1A
+
+//Question 1.
+  1. Assign each student in the contact list a number, starting with 1 and
+     ending with 63.
+  2. The teacher will call student 1 and tell them to call students 2-7.
+  3. After a student has been called, they will immediately begin calling
+     the next group of students. The assigned groups would decrease with
+     number and time, eg. Student 2 calls students 
+     8, 9, 10, 11, 12 (5 students), while student 3 will call students, 
+     13, 14, 15, 16 (4 students).
+  4. This calling tree will continue to branch out, with the
+     following tiers of students calling the next.
+  5. While student 1 calls students 2-7 in step 2, the teacher will be
+     calling another 6 students. These students will repeat steps 3-4.
+  6. Continue to grow the tree until all 63 students have been called within
+     the 15 minute constraint.
+
+//Question 2.
+  1. Assume that the destination is west of your current location.
+  2. Determine whether the street you are on flows toward the east or the
+     west. 
+       If it points to the east, proceed to step 3.
+       If it points to the west, proceed to step 6.
+  3. Drive until you reach the nearest intersection and determine whether
+     the cross road flows north or south.
+       If it points north, proceed to step 4.
+       If it points south, proceed to step 5.
+  4. Turn left at the intersection. Continue to drive, taking a left at the
+     next two intersections.Drive straight, skipping the next intersection.  
+     Then, continue to drive and take a right at the
+     following three intersections. After the third right, continue down 
+     the road until you reach your destination.
+  5. Turn right at the intersection. Continue to drive, taking a right at
+     the next two intersections. Skip the next intersection, taking a left
+     at the intersection after. Continue to drive, taking two more lefts
+     at the following intersections. Continue down the road until you reach
+     your destination.
+  6. Drive until you reach the nearest intersection and determine whether
+     the cross road flows north or south.
+       If it points to the north, proceed to step 7.
+       If it points to the south, proceed to step 8.
+  7. Turn right at the intersection. Turn left at the following two
+     intersections. Skip the next intersection, then take a left at the 
+     following three interesections. Continue down the road until you 
+     reach the destination.
+  8. Turn left at the intersection, then skip the following intersection.
+     Take a right at the following three intersections. Continue down the
+     road until you reach your destination.
+
+//Question 3.
+  1. Place tentacle againt the left wall of the maze.
+  2. Swim forward, continuing to feel for the left wall. 
+  3a. If the left wall is missing at the current square, turn left and
+     proceed forward one square, replacing the tentacle on the left wall.
+  3b. If Roger is blocked in front by a wall, turn in 90 degree increments
+     until there is no obstruction and continue one square forward.
+  4. Repeat step 2, using steps 3a and 3b when said instances occur, until
+     Roger reaches his doctor.

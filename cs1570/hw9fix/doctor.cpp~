@@ -1,0 +1,38 @@
+//Program: Dylan Elznic   Section: A
+//File: doctor.cpp
+//Description: 
+
+#include "doctor.h"
+
+void doctor::eat(const short amount)
+{
+  m_schraut_eaten += amount;
+  if(m_schraut_eaten >= PUKE)
+  {
+    puke();
+  }
+  return;
+}
+
+void doctor::puke()
+{
+  m_schraut_eaten = 0;
+  cout<<endl<<"          Blaaaaargh!!! The Doctor puked."<<endl<<endl;
+  
+  return;
+}
+
+void doctor::pay(const int money)
+{
+  m_doc_funds += money;
+  
+  return;
+}
+
+ostream& operator<<(ostream& stream, const doctor& doc)
+{
+  stream<<"[Doctor "<<doc.m_doc_name<<"] has: $"<<doc.m_doc_funds<<", and "
+        <<doc.m_schraut_eaten<<" oz of Schraut!"<<endl<<endl;
+        
+  return stream;
+}

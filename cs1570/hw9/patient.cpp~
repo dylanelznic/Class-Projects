@@ -1,0 +1,12 @@
+//Programmer: Dylan Elznic
+
+#include "patient.h"
+#include <iostream>
+using namespace std;
+
+patient::patient(const int amntMoney, const int condition, string patName)
+{
+  m_amntMoney = amntMoney;
+  m_condition = condition;
+  m_patName = patName;
+}

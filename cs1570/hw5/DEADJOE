@@ -1,0 +1,201 @@
+
+*** These modified files were found in JOE when it aborted on Tue Oct  7 14:05:26 2014
+*** JOE was aborted by UNIX signal 1
+
+*** File 'hw5.cpp'
+
+
+#include <iostream>
+using namespace std;
+
+/*-----Prototypes-----*/
+
+void greeting();
+
+int getMass();
+int getHeight();
+int getAge();
+int getWeight();
+float getSerum();
+float getbMI();
+bool getHeartDisease();
+short getBaconlb();
+float getLeftlength();
+flaot getRightlength();
+
+int bodyMassIndex(int mass, int height);
+float creatineClearance(int age, int weight, float serum);
+float coronaryRisk(float bMI, bool heartDisease, short baconlb);
+float totterIndex(float leftlength, float rightlength);
+void goodbye();
+
+
+int main()
+{
+  /*-----Variables-----*/
+  
+  int menuChoice = 0;
+  bool quit = false;
+
+  int bmi;
+  float creatClearance;
+  float coroRisk;
+  float totIndex;
+  
+  /*-----Menu-----*/
+
+  greeting();  
+
+  do
+  {  
+    cout<<"   Eloe's Health-o-Matic"  <<endl<<endl
+        <<"1. Body Mass Index(BMI)"   <<endl
+        <<"2. Creatine Clearance(CC)" <<endl
+        <<"3. Coronary Risk(CR)"      <<endl
+        <<"4. Totter Index(TI)"       <<endl
+        <<"5. Quit"                   <<endl<<endl;
+ 
+    cout<<"Choice: ";
+    cin>>menuChoice;
+    
+    switch(menuChoice)
+    {
+      case 1:
+        getMass();
+        getHeight();
+        bmi = bodyMassIndex(mass,height);
+        cout<<endl<<endl;
+        break;
+    
+      case 2:
+        getAge();
+        getWeight();
+        getSerum();
+        creatClearance = creatineClearance(age,weight,serum);
+        cout<<endl<<endl;
+        break;
+      
+      case 3:
+        getbMI();
+        getHeartDisease();
+        getBaconlb();
+        coroRisk = coronaryRisk(bMI,heartDisease,baconlb);
+        break;
+      
+      case 4:
+        getLeftlength();
+        getRightlength();
+        totIndex = totterIndex(leftlength,rightlength);
+        cout<<endl<<endl;
+        break;
+      
+      case 5:
+        goodbye();
+        quit = true;
+        break;
+      
+      default:
+        cout<<"Error: Invalid choice.";
+        break;
+    }
+    
+  }while(!quit);  
+    
+  return 0; 
+}
+
+/*-----Definitions-----*/
+
+void greeting()
+{
+  cout<<endl<<endl<<"Welcome to Dr. Eloe's Health-o-Matic!"<<endl 
+      <<"Please select an option to begin diagnosis."<<endl<<endl;
+  return; 
+}
+
+int getMass()
+{
+  cout<<"Please enter your mass: ";
+  
+}
+
+int bodyMassIndex(int mass, int height)
+{
+  float bMI = 0;
+  bMI = (static_cast<float>(mass)/(height*height))*703;
+  cout<<"BMI: "<<bMI<<".";
+  return 0;
+}
+
+float creatineClearance(int age, int weight, float serum)
+{
+  cout<<"Creatine Clearance: "<<(140-age)*weight/72*serum<<".";
+  return 0;
+}
+
+float coronaryRisk(float bMI, bool heartDisease, short baconlb)
+{
+  int surveycount = 0;
+  float bmiScale = 0;
+  char heartDisease;
+  int baconcount = 0;
+  
+  cout<<endl<<"Please enter your BMI: ";
+  cin>>bmiScale;
+  if(bMI>30)
+    surveycount+=2;
+  
+  cout<<"Does the patient have heart disease (y/n): ";
+  cin>>heartDisease;
+  if(heartDisease = 'y')
+    surveycount+=1;
+  
+  cout<<"How many pounds of bacon have they had for breakfast"
+      <<" this morning: ";
+  cin>>baconcount;
+  surveycount+=baconcount;
+  
+  cout<<endl<<"Coronary Risk: "<<surveycount<<endl<<endl;
+  
+  return 0;
+}
+
+float totterIndex(float leftlength, float rightlength)
+{
+  float totIndexValue = 0;
+
+  while(leftlength > 0 && rightlength > 0)
+  {
+    totIndexValue = (leftlength/rightlength);
+    break;
+  }
+  cout<<"Totter Index: "<<totIndexValue<<".";
+  return 0;
+}
+
+void goodbye()
+{
+  cout<<endl<<"Thank you for using Dr. Eloe's Health-o-Matic! Goodbye."
+      <<endl<<endl;
+  return;
+}
+
+*** File '(Unnamed)'
+hw5.cpp
+hw5.cpp
+
+*** These modified files were found in JOE when it aborted on Tue Oct  7 21:56:22 2014
+*** JOE was aborted by UNIX signal 1
+
+*** File '(Unnamed)'
+hw5.cpp
+hw5.cpp
+hw5.cpp
+hw5.cpp
+hw5.cpp
+hw5.cpp
+hw5.cpp
+hw5.cpp
+hw5.cpp
+hw5.cpp
+hw5.cpp

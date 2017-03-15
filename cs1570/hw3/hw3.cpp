@@ -1,0 +1,413 @@
+//Programmer: Dylan Elznic   Date: 9/15/14
+//File: hw3.cpp   Section: A
+//Purpose:
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  /*-----Variables-----*/
+  const int CER_CON = 9;   //Cerebral Contusion
+  const int DISK_RUP = 7;  //Disk Rupture
+  const int BRK_RAD = 3;   //Broken Radius
+  const int INT_DIS = 2;   //Intestinal Distress
+  const int BRK_NCK = 6;   //Broken Neck
+  const int BRN_TOE = 1;   //Toe (Burned Toe Hair)
+  const int PRM_FCE = 3;   //Permanent Smiley Face
+  const int FLA_CST = 4;   //Flail Chest
+  const int EAR_GAS = 5;   //Earlobe Gastrophilology
+  const int ALC_PSN = 2;   //Alcohol Poisoning
+  const int FRC_FMR = 3;   //Fractured Femur
+  const int FGR_FNG = 0;   //Finger (Nail Fungus)
+  const int ALT_EGO = 4;   //Altered Ego
+  const int ALN_IMP = 8;   //Alien Implantation
+  const int BBQ_RIB = 7;   //BBQd Ribs
+  const int DEF_PS = 1;    //Deformed Plastic Surgery
+
+  string Pat1_Name;
+  string Pat2_Name;
+   
+  int region = 0;
+  char subregion = 0;
+       
+  int pat1Injury = 0;   //Injury Choice Patient 1
+  int pat1ISS = 0;      //ISS Patient 1
+           
+  int pat2Injury = 0;  //Injury Choice Patient 2
+  int pat2ISS = 0;     //ISS Patient 2
+               
+  
+  /*-----Greeting------*/
+  cout<<endl;
+  cout<<"Greetings, Dr. Eloe."             <<endl
+      <<"Please enter your first patients' name."<<endl;
+  cout<<"Patient 1: ";
+  cin>>Pat1_Name;
+  cout<<endl<<endl;
+  
+  /*-----Loop Start----*/
+  for(int i = 0; i <= 1; i++)
+  {
+  
+  /*-----Patient 2 Name----*/
+    if(i == 1)
+    {
+      cout<<"Please enter your second patient's name."<<endl;
+      cout<<"Patient 2: ";
+      cin>>Pat2_Name;
+      cout<<endl<<endl;
+    }
+  
+  /*-----Region------*/
+  
+    cout<<"   Patient Menu       "<<endl
+        <<"   Region             "<<endl
+        <<"   ------------       "<<endl
+        <<"1. Head & Neck"        <<endl
+        <<"2. Torso"              <<endl
+        <<"3. Extremity"          <<endl
+        <<"4. Not Listed"         <<endl<<endl;
+    cout<<"Choose an option: ";
+    cin>>region;
+    cout<<endl<<endl;
+  
+  /*-----Subregions---*/
+ 
+    //Head & Neck
+    if(region != 2 && region != 3 && region != 4  && region <= 4)
+    { 
+      cout<<"    Patient ";
+      if(i == 0)
+      {
+        cout<<Pat1_Name;
+      }
+      else
+      {
+        cout<<Pat2_Name;
+      }  
+      cout<<"'s Menu                "<<endl
+          <<"    Subregion          "<<endl
+          <<"    ------------       "<<endl
+          <<"a. Head"               <<endl
+          <<"b. Neck"               <<endl
+          <<"c. Face"               <<endl<<endl;
+      cout<<"Choose an option: ";
+      cin>>subregion;
+      cout<<endl<<endl;
+    }      
+
+    //Torso
+    else if(region != 1 && region != 3 && region != 4  && region <= 4)
+    {
+      cout<<"    Patient Menu       "<<endl
+          <<"    Subregion          "<<endl
+          <<"    ------------       "<<endl
+          <<"d. Back"               <<endl
+          <<"e. Chest"              <<endl
+          <<"f. Abdomen"            <<endl<<endl;
+      cout<<"Choose an option: ";
+      cin>>subregion;
+      cout<<endl<<endl;
+    }
+
+    //Extremity
+    else if(region != 1 && region != 2 && region != 4  && region <= 4)
+    {
+      cout<<"    Patient Menu       "<<endl
+          <<"    Subregion          "<<endl
+          <<"    ------------       "<<endl
+          <<"g. Arm"                <<endl
+          <<"h. Leg"                <<endl<<endl;
+      cout<<"Choose an option: ";
+      cin>>subregion;
+      cout<<endl<<endl;
+    }
+  
+    //Not Listed
+    else
+    {
+     if(i == 0)
+     {
+       pat1ISS = -1;
+     }
+     else if(i == 1)
+     {
+       pat2ISS = -1;
+     }
+    }
+  
+  /*-----Injury-------*/
+  
+    //Head
+    if(subregion == 'a')
+    {
+      cout<<"   Patient Menu       "<<endl
+          <<"   Injury             "<<endl
+          <<"   ------------       "<<endl
+          <<"1. Cerebral Contusion" <<endl
+          <<"2. Earlobe Gastrophilology"<<endl
+          <<"3. Altered Ego"        <<endl<<endl;
+      cout<<"Choose an option: ";
+    
+      if(i == 0)
+      {
+        cin>>pat1Injury;
+        if(pat1Injury == 1)
+          pat1ISS = CER_CON;
+        else if(pat1Injury == 2)
+          pat1ISS = EAR_GAS;
+        else
+          pat1ISS = ALT_EGO;
+        cout<<endl<<endl;
+      }
+    
+      else if(i == 1)                                                   
+      {
+        cin>>pat2Injury;
+        if(pat2Injury == 1)
+          pat2ISS = CER_CON;
+        else if(pat2Injury == 2)
+          pat2ISS = EAR_GAS;
+        else
+          pat2ISS = ALT_EGO;
+        cout<<endl<<endl;                                                 
+      }    
+    }
+  
+    //Neck
+    else if(subregion == 'b')
+    {
+      cout<<"   Patient Menu       "<<endl
+          <<"   Neck Injury        "<<endl
+          <<"   ------------       "<<endl
+          <<"1. Broken"             <<endl<<endl;
+      cout<<"Choose an option: ";
+
+      if(i == 0)
+      {
+        cin>>pat1Injury;
+        pat1ISS = BRK_NCK;
+        cout<<endl<<endl;
+      }
+                                                                  
+      else if(i == 1)
+      {
+        cin>>pat2Injury;
+        pat2ISS = BRK_NCK;
+        cout<<endl<<endl;
+      }
+    }
+      
+    //Face
+    else if(subregion == 'c')
+    {
+      cout<<"   Patient Menu       "<<endl
+          <<"   Face Injury        "<<endl
+          <<"   ------------       "<<endl
+          <<"1. Permanent Smile Face"<<endl
+          <<"2. Deformed Plastic Surgery"<<endl<<endl;
+      cout<<"Choose an option: ";
+    
+      if(i == 0)
+      {
+        cin>>pat1Injury;
+        if(pat1Injury == 1)
+          pat1ISS = PRM_FCE;
+        else
+          pat1ISS = DEF_PS;
+        cout<<endl<<endl;
+      }
+    
+      else if(i == 1)
+      {
+        cin>>pat2Injury;
+        if(pat2Injury == 1)
+          pat2ISS = PRM_FCE;
+        else
+          pat2ISS = DEF_PS;
+        cout<<endl<<endl;
+      }   
+    }
+  
+    //Back
+    else if(subregion == 'd')
+    { 
+      cout<<"   Patient Menu       "<<endl
+          <<"   Back Injury        "<<endl
+          <<"   ------------       "<<endl
+          <<"1. Disk Rupture"       <<endl    
+          <<"2. BBQd Ribs"          <<endl<<endl;
+      cout<<"Choose an option: ";
+  
+      if(i == 0)
+      {
+        cin>>pat1Injury;
+        if(pat1Injury == 1)
+          pat1ISS = DISK_RUP;
+        else
+          pat1ISS = BBQ_RIB;
+        cout<<endl<<endl;
+      }
+                                                      
+      else if(i == 1)
+      {
+        cin>>pat2Injury;
+        if(pat2Injury == 1)
+          pat2ISS = DISK_RUP;
+        else
+          pat2ISS = BBQ_RIB;
+        cout<<endl<<endl;
+      }  
+    }                                              
+  
+    //Chest
+    else if(subregion == 'e')
+    {
+      cout<<"   Patient Menu       "<<endl
+          <<"   Chest Injury       "<<endl
+          <<"   ------------       "<<endl
+          <<"1. Flail Chest"        <<endl 
+          <<"2. Alien Implantation" <<endl<<endl;
+      cout<<"Choose an option: ";
+    
+      if(i == 0)
+      {
+        cin>>pat1Injury;
+        if(pat1Injury == 1)
+          pat1ISS = FLA_CST;
+        else
+          pat1ISS = ALN_IMP;
+        cout<<endl<<endl;
+      }
+
+      else if(i == 1)
+      {
+        cin>>pat2Injury;
+        if(pat2Injury == 1)
+          pat2ISS = FLA_CST;
+        else
+          pat2ISS = ALN_IMP;
+        cout<<endl<<endl;
+      }
+    }
+                                                                                    
+    //Abdomen
+    else if(subregion == 'f')
+    {
+      cout<<"   Patient Menu       "<<endl
+          <<"   Abdomen Injury     "<<endl
+          <<"   ------------       "<<endl
+          <<"1. Intestinal Distress"<<endl
+          <<"2. Alcohol Poisoning"  <<endl<<endl;
+      cout<<"Choose an option: ";
+
+      if(i == 0)
+      {
+        cin>>pat1Injury;
+        if(pat1Injury == 1)
+          pat1ISS = INT_DIS;
+        else
+          pat1ISS = ALC_PSN;
+        cout<<endl<<endl;
+      }
+
+      else if(i == 1)
+      {
+        cin>>pat2Injury;
+        if(pat2Injury == 1)
+          pat2ISS = INT_DIS;
+        else
+          pat2ISS = ALC_PSN;
+        cout<<endl<<endl;
+      }
+    }
+                                                                                    
+    //Arm
+    else if(subregion == 'g')
+    {
+      cout<<"   Patient Menu       "<<endl
+          <<"   Arm Injury         "<<endl
+          <<"   ------------       "<<endl
+          <<"1. Broken Radius"      <<endl
+          <<"2. Finger (Nail Fungus)"<<endl<<endl;
+      cout<<"Choose an option: ";
+    
+      if(i == 0)
+      {
+        cin>>pat1Injury;
+        if(pat1Injury == 1)
+          pat1ISS = BRK_RAD;
+        else
+          pat1ISS = FGR_FNG;
+        cout<<endl<<endl;
+      }
+
+      else if(i == 1)
+      {
+        cin>>pat2Injury;
+        if(pat2Injury == 1)
+          pat2ISS = BRK_RAD;
+        else
+          pat2ISS = FGR_FNG;
+        cout<<endl<<endl;
+      }
+    }
+
+    //Leg                                            
+    else if(subregion == 'h')
+    {
+      cout<<"   Patient Menu       "<<endl
+          <<"   Leg Injury         "<<endl
+          <<"   ------------       "<<endl
+          <<"1. Toe (Burned Toe Hair)"<<endl
+          <<"2. Fractured Femur"    <<endl<<endl;
+      cout<<"Choose an option: ";
+
+      if(i == 0)
+      {
+        cin>>pat1Injury;
+        if(pat1Injury == 1)
+          pat1ISS = BRN_TOE;
+        else
+          pat1ISS = FRC_FMR;
+        cout<<endl<<endl;
+      }
+
+      else if(i == 1)
+      {
+        cin>>pat2Injury;
+        if(pat2Injury == 1)
+          pat2ISS = BRN_TOE;
+        else
+          pat2ISS = FRC_FMR;
+        cout<<endl<<endl;
+      }
+    }                                                                                  
+
+  /*------Loop End-------*/
+  } 
+
+  /*-----Results---------*/
+  if(pat1ISS > pat2ISS)
+  {
+    cout<<Pat1_Name<<" will be attended to first, with an ISS of "<<pat1ISS
+        <<"."<<endl<<endl;
+  }
+  else if(pat1ISS < pat2ISS)
+  {
+    cout<<Pat2_Name<<" will be attended to first, with an ISS of "<<pat2ISS
+        <<"."<<endl<<endl;
+  }
+  else
+  {
+    if(Pat1_Name > Pat2_Name)
+      cout<<Pat1_Name<<" will be attended to first, with an ISS of "<<pat1ISS
+          <<"."<<endl<<endl;
+    else if(Pat1_Name < Pat2_Name)
+      cout<<Pat2_Name<<" will be attended to first, with an ISS of "
+          <<pat2ISS<<"."<<endl<<endl;
+  }
+  
+  return 0;  
+}

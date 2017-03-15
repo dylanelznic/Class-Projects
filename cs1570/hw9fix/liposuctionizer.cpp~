@@ -1,0 +1,45 @@
+//Programmer: Dylan Elznic   Section: A
+//File: liposuctionizer.cpp
+//Description: Containts the definititons for the liposuctionizer.h file
+
+#include "liposuctionizer.h"
+
+void liposuctionizer::charge_patient(patient & pat)
+{
+  int cost = m_cost_per_use;
+  pat.pay_out(cost);
+  inc_uses(); 
+  return;
+}
+
+void liposuctionizer::inc_uses()
+{
+  m_num_uses += 1;
+  return;
+}
+        
+void liposuctionizer::apply(patient & pat)
+{
+  if(m_num_uses == LIPO_NUM_KILL)              //Max number of uses
+  {
+    const int dead = (-(pat.get_condition())); //Negative of current health
+    pat.modify_health(dead);                   //Kills the patient
+  }
+  
+  pat.modify_mhealth(LIPO_INCR_MHEALTH);       //Increases mental health
+  
+  int currentWeight = pat.get_weight(); //Subtracts % from current weight
+  int newWeight = (currentWeight - (currentWeight * (LIPO_PCT_LOST / 100)));
+  pat.modify_weight(newWeight);
+  
+  return;
+}          
+            
+ostream& operator<<(ostream& stream,
+                    const liposuctionizer& liposuctionizer)
+{
+  stream<<"[Liposuctionizer] Used "
+        <<liposuctionizer.m_num_uses<<" times "
+        <<"at $"<<liposuctionizer.m_cost_per_use;
+  return stream;
+}

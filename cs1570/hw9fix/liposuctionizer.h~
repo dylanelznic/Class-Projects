@@ -1,0 +1,77 @@
+//Programmer: Dylan Elznic / Ryan Stoughton   Section: A
+//File: liposuctionizer.h
+//Description:
+
+#ifndef LIPOSUCTIONIZER_H
+#define LIPOSUCTIONIZER_H
+
+#include <iostream>
+using namespace std;
+
+#include "patient.h"
+
+const short LIPO_DEF_USE = 0;
+const float LIPO_DEF_COST = 750;
+
+const int   LIPO_INCR_MHEALTH = 20;
+
+const int   LIPO_NUM_KILL = 61;
+const float LIPO_PCT_LOST = 10;
+
+/*
+   >liposuctioner()
+    Description: defalut constructor
+    Pre: none
+    Post: m_cost_per_use and m_num_uses set to respective consts
+         
+   >charge_patient()      
+    Description: passes m_cost_per_use of CO to pat's pay.out()
+    Pre: none
+    Post: the passed patient's pay_out() is called
+    
+   >apply()
+    Description: modifies the passed m_health and m_weight
+    Pre: none
+    Post: the passed patient's m_health and weight are modified by consts
+         
+   >get_cost()       
+    Description: Accessor
+    Pre: none
+    Post: CO's cost_per_use is returned
+   
+   >Overloaded << Operator               
+    Description: Prints formatted class
+    Pre: none
+    Post: Outputs pre-formatted liposuctionizer class
+                        
+   >inc_uses()                                    
+    Description: increments CO's m_num_uses
+    Pre: none
+    Post: +1 to CO's m_num_uses
+                                                            
+*/
+
+class liposuctionizer
+{
+  public:
+    //Constructor
+    liposuctionizer(): m_num_uses(LIPO_DEF_USE), m_cost_per_use(LIPO_DEF_COST){}
+          
+    void charge_patient(patient & pat);
+    void apply(patient & pat);
+    void inc_uses();
+        
+    //Getter
+    float getCost()const {return m_cost_per_use;}
+    
+    //Print
+    friend ostream& operator<<(ostream& stream,
+                               const liposuctionizer & liposuctionizer);
+                                                         
+  private:
+    short m_num_uses;      //Number of uses of the Liposuctionizer
+    float m_cost_per_use;  //Cost per use of the Liposuctionizer
+
+};
+
+#endif

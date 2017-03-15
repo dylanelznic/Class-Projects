@@ -1,0 +1,68 @@
+//Programmer: Dylan Elznic / Ryan Stoughton  Section: A
+//File: hospital_room.hpp
+//Description: Contains the definitions for the hospital_room.h file
+
+template <class T_machine>
+void hospital_room<T_machine>::admit(patient & pat, doctor & doc)
+{
+  //Patient that's passed in admit() is passed to the following
+  
+  short digested = doc.getEaten();
+  float cost = m_the_machine.getCost();
+  float patFunds = pat.get_money();
+  
+  //If patients is not dead and has enough money
+  if((pat.is_alive() == true) && (patFunds >= cost))
+  {
+    m_the_machine.charge_patient(pat);
+    doc.pay(cost);
+    
+    short bite = (rand()%(MAX_SCHRAUT) + MIN_SCHRAUT);
+    if(bite > m_schraut)
+    {
+      doc.eat(m_schraut); //Eats all of it
+      m_schraut = 0;
+      if(digested > (EAT_NUM + 1))
+      {
+        for(int a = 0; a < (digested - EAT_NUM); a++)
+        {
+          m_the_machine.apply(pat);
+          m_the_machine.inc_uses();
+        }
+      }
+      else
+      {
+        m_the_machine.apply(pat);
+      }
+    }
+    
+    else if(m_schraut > 0)
+    {
+      m_schraut -= bite;
+      doc.eat(bite);
+      if(digested > (EAT_NUM +1))
+      {
+        for(int b = 0; b < (digested - EAT_NUM); b++)
+        {
+          m_the_machine.apply(pat);
+          m_the_machine.inc_uses();
+        }
+      }
+      else
+      {
+        m_the_machine.apply(pat);
+      }
+    }
+  }
+  cout<<"Insufficient Funds";
+  return;
+}
+
+template <class U>
+ostream& operator<<(ostream& stream, const hospital_room<U> & room)
+{
+  stream<<"[Hospital Room] "<<room.m_schraut<<" oz of schraut"
+        <<" left."<<room.m_the_machine;
+        
+  return stream; 
+}

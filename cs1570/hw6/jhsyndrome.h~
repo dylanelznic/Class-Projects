@@ -1,0 +1,90 @@
+//Programmer: Dylan Elznic     Section: A
+//File: jhsyndrome.h
+//Description:
+
+#ifndef JHSYNDROME_H
+#define JHSYNDROME_H
+
+#include <iostream>
+using namespace std;
+
+struct protein
+{
+  int m_pro1;
+  float m_pro2;
+  int m_pro3;
+  int m_pro4;
+  int m_pro5;
+};
+
+//Sound Test Constant
+const int SOUND_RANGE = 21;
+
+//Protein Ranges
+const int P1_RANGE = 101;
+const int P2_RANGE = 1000;
+const int P3_RANGE = 11;
+const int P4_RANGE = 41 + 10;
+const int P5_RANGE = 11;
+
+//Disease Conditions 1
+const int P1_UPPERLIM = 10;
+const int P5_UPPERLIM = 2;
+const int P4_LOWERLIM = 20;
+const int P4_UPPERLIM = 40;
+const int P3_LOWERLIM = 6;
+
+//Disease Conditions 2
+const int P5_LOWERLIM = 2;
+const int P1P2P3_SUMLIM = 75;
+
+void greet();
+//Description:
+//Pre:
+//Post:
+
+string getPat();
+//Description:
+//Pre:
+//Post:
+
+void ringFlatA(int & p1, float & p2, int & p3);
+//Description:
+//Pre:
+//Post:
+
+void ringMiddleG(float & p2, int & p4);
+//Description:
+//Pre:
+//Post:
+
+void ringFlatC(int & p1, int & p4, int & p5);
+//Description:
+//Pre:
+//Post:
+
+void jhspostive(string patname);
+//Description:
+//Pre:
+//Post:
+
+void jhsnegative(string patname);
+//Desctiption:
+//Pre:
+//Post:
+
+void JHSynDiag(const protein & prot, const string & patname);
+//Description:
+//Pre:
+//Post:
+
+int soundtest();
+//Description:
+//Pre:
+//Post:
+
+//Description:
+//Pre:
+//Post:
+
+#endif

@@ -1,0 +1,267 @@
+//Programmer: Dylan Elznic     Section: A
+//File: zombiestudyfncts.cpp
+//Description: This file contains the functions for the zombiestudy.cpp file
+
+#include "zombiestudy.h"
+#include <iostream>
+
+using namespace std;
+
+void greeting()
+{
+  cout<<endl<<endl
+      <<" ===== Welcome to Dr. Eloe's Study on Zombie-ism! ===== "
+      <<endl<<endl;
+      
+  return;
+}
+
+/*   Assigns Random DNA strand   */
+void assignDNA(char dNA[])
+{
+  int index = 0;
+  
+  for(int i = 0; i < DNA_SIZE; i++)
+  {
+    index = rand()%101;
+    if(index <= G_UPPER)
+      dNA[i] = 'G';
+    else if(index > G_UPPER && index <= T_UPPER)
+      dNA[i] = 'T';
+    else if(index > T_UPPER && index <= A_LOWER)
+      dNA[i] = 'A';
+    else
+      dNA[i] = 'C';
+  }
+  
+  return;
+}
+
+/*   Assigns Random Odor State   */
+string assignBodyOdor()
+{
+  string randBodyOdor;
+  int index = 0;
+
+  index = rand()%4;
+  if(index == 1)
+    randBodyOdor = "Pleasant";
+  else if(index == 2)
+    randBodyOdor = "Neutral";
+  else if(index == 3)
+    randBodyOdor = "Slight Putrification";
+  else
+    randBodyOdor = "Rotten";
+
+  return randBodyOdor;
+}
+
+/*  Assigns Random Brain Desire State   */
+string assignBrainDesire()
+{
+  string randBrainDesire;
+  int index = 0;
+  
+  index = rand()%2;
+  if(index == 0)
+    randBrainDesire = "Desires Brains";
+  else
+    randBrainDesire = "Does Not Desire Brains";
+    
+  return randBrainDesire;
+
+}
+
+/*   Assings Random Gait Value   */
+string assignGait()
+{
+  string randGait;
+  int index = 0;
+  
+  index = rand()%3;
+  if(index == 0)
+    randGait = "Normal";
+  else if(index == 1)
+    randGait = "Shuffle";
+  else
+    randGait = "Crawling";
+    
+  return randGait;
+
+}
+
+/*   Creates Sample Group & Assigns Traits   */
+void getPeople(person people[], const int dataLength)
+{
+  for(int i = 0; i < dataLength; i++)
+  { 
+    assignDNA(people[i].dNA);
+    people[i].bodyOdor = assignBodyOdor();
+    people[i].brainDesire = assignBrainDesire();
+    people[i].gait = assignGait();
+  }
+  
+  return;
+} 
+
+/*   Gets % of Sample That Desires Brains   */
+void brainDesireTest(person people[], const int dataLength, 
+                     float & brainDesPercent)
+{
+  float count = 0;
+   
+  for(int i = 0; i < dataLength; i++)
+  {
+    if(people[i].brainDesire == "Desires Brains")
+    count++;
+  }
+                             
+  brainDesPercent = (count/dataLength)*100;
+
+  return;                                   
+}
+
+/*   Gets % of Sample That Smells "SP" and Rotten   */  
+void bodyOdorTest(person people[], const int dataLength, float & smellPercent)
+{
+  float count = 0;
+
+  for(int i = 0; i < dataLength; i++)
+  {
+    if(people[i].bodyOdor == "Slight Putrification" || 
+       people[i].bodyOdor == "Rotten")
+      count++;
+  }
+  
+  smellPercent = (count/dataLength)*100;
+  
+  return;
+}
+
+/*   Gets % of Sample That Shuffles or Crawls   */
+void gaitTest(person people[], const int dataLength, float & gaitPercent)
+{
+  float count = 0;
+  
+  for(int i = 0; i < dataLength; i++)
+  {
+    if(people[i].gait == "Shuffle" ||
+       people[i].gait == "Crawl")
+      count++;
+  }
+                         
+  gaitPercent = (count/dataLength)*100;
+                           
+  return;
+}                             
+
+/*  Gets % of Sample That Has All Zombie Traits   */
+void physZombTest(person people[], const int dataLength, 
+                  float & physZombPercent)
+{
+  float count = 0;
+  
+  for(int i = 0; i < dataLength; i++)
+  {
+    if(people[i].brainDesire == "Desires Brains")
+    { 
+      if(people[i].bodyOdor == "Slight Putrification" ||
+         people[i].bodyOdor == "Rotten")
+      {
+        if(people[i].gait == "Shuffle" || people[i].gait == "Rotten")
+        {
+          count++;
+        }
+      }
+    }
+  }
+  
+  physZombPercent = (count/dataLength)*100;
+  
+  return;
+}
+
+/*   Gets % of Sample That Has GTAC DNA Structure   */
+void dNAZombTest(person people[], const int dataLength, 
+                 float & dNAZombPercent)
+{
+  float count = 0;
+  
+  for(int i = 0; i < dataLength; i++)
+  {
+  
+    for(int j = 0; j < DNA_SIZE-4; j++)
+    {
+      if(people[i].dNA[j] == 'G')
+      {
+        if(people[i].dNA[j+1] == 'T')
+        {
+          if(people[i].dNA[j+2] == 'A')
+          {
+            if(people[i].dNA[j+3] == 'C')
+            {
+              count++;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  dNAZombPercent = (count/dataLength)*100;
+  
+  return;
+}
+
+void combZombTest(person people[], const int dataLength, 
+                  float & combZombPercent)
+{
+  float count = 0;
+    
+  for(int i = 0; i < dataLength; i++)
+  {      
+    for(int j = 0; j < DNA_SIZE-4; j++)
+    {
+      if(people[i].dNA[j] == 'G')
+      {
+        if(people[i].dNA[j+1] == 'T')
+        {
+          if(people[i].dNA[j+2] == 'A')
+          {
+            if(people[i].dNA[j+3] == 'C')
+            {
+              if(people[i].brainDesire == "Desires Brains")    
+              {
+                if(people[i].bodyOdor == "Slight Putrification" ||
+                   people[i].bodyOdor == "Rotten") 
+                { 
+                  if(people[i].gait ==
+                     "Shuffle" || people[i].gait == "Rotten") 
+                  { 
+                  
+                    count++; 
+                  
+                  } 
+                }    
+              }
+            }
+          }
+        }                                                                                                                                   
+      }
+    }
+  }
+ combZombPercent = (count/dataLength)*100; 
+
+  return;
+}
+
+void closing()
+{
+  cout<<endl
+      <<"We hope you found this research study interesting."
+      <<endl<<endl;
+  
+  return;
+}  
+  
+  
