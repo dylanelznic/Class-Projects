@@ -4,3 +4,4 @@
 - Implement 'clock' replacement algorithm
 - Implement prepaging
 - Complete report and graphs
+- Create Input error message
