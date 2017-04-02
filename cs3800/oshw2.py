@@ -5,13 +5,44 @@ import sys
 import math
 import datetime
 
-""" Input Arguments
-sys.argv[1]: programlist file
-sys.argv[2]: programtrace file
-sys.argv[3]: pagesize (positive power of 2)
-sys.argv[4]: page replacement algorithm (clock, fifo, or lru)
-sys.argv[5]: demand/prepaging (0 = demand, 1 = prepaging)
-"""
+# Input handling
+inputErrors = ['Programlist file',
+			   'Programtrace file',
+			   'Pagesize (positive power of 2)',
+			   'Page replacement algorithm (Clock, FIFO, or LRU)',
+			   'Demand/prepaging (0 = demand, 1 = prepaging)',
+			   ]
+
+def checkExists():
+	try:
+		temp = sys.argv[i]
+	except:
+		print('\n> Missing input for Input {}: "{}".\n'.format(i, inputErrors[i-1]))
+		exit()
+
+def invalidInput():
+	print('\n> Invalid input for Input {}: "{}"\n'.format(i, inputErrors[i-1]))
+	exit()
+
+for i in range(1,6):
+	if i == 1 or i == 2:
+		try:
+			open(sys.argv[i])
+		except:
+			invalidInput()
+	elif i == 3:
+		checkExists()
+		if int(sys.argv[i]) not in [1, 2, 4, 8, 16]:
+			invalidInput()
+	elif i == 4:
+		checkExists()
+		if sys.argv[i] not in ['Clock', 'FIFO', 'LRU']:
+			invalidInput()
+	elif i == 5:
+		checkExists()
+		if int(sys.argv[i]) not in [0, 1]:
+			invalidInput()
+# End input handling
 
 class MainMemory(object):
 	AVAILABLE_PAGES = 512
@@ -39,7 +70,7 @@ class PageTable(object):
 workingMemory = MainMemory()
 
 id_index = 0
-bookmark = 0
+c_pointer = 0
 page_faults = 0
 temp_prognum = 0
 temp_progsize = 0
@@ -99,25 +130,63 @@ with open(sys.argv[2]) as f:
 		temp_abs_page = math.floor(temp_rel_word / workingMemory.page_size)
 
 		temp_abs_name = workingMemory.page_tables[temp_prognum].unique_id_no[temp_abs_page]
+		temp_abs_next = workingMemory.page_tables[temp_prognum].unique_id_no[temp_abs_page + 1]
 
 		if temp_abs_name in workingMemory.active_pages:
 			location = workingMemory.active_pages.index(temp_abs_name)
 			if algorithm == 'LRU':
 				workingMemory.active_times[location] = datetime.datetime.now()	
-			elif algorithm == 'clock':
+			elif algorithm == 'Clock':
 				workingMemory.active_clock[location] = 1
 		
 		else:
 			page_faults += 1
+			
 			if algorithm == 'LRU':
 				oldest = workingMemory.active_times.index(min(workingMemory.active_times))
 				workingMemory.active_pages[oldest] = temp_abs_name
 				workingMemory.active_times[oldest] = datetime.datetime.now()
-			elif algorithm == 'clock':
-				pass
+				if paging_mode == 'prepaging':
+					oldest = workingMemory.active_times.index(min(workingMemory.active_times))
+					workingMemory.active_pages[oldest] = temp_abs_next
+					workingMemory.active_times[oldest] = datetime.datetime.now()
+			
+			elif algorithm == 'Clock':
+				found = 0
+				while(found != 1):
+					for i in range(c_pointer, len(workingMemory.active_pages)):
+						if workingMemory.active_clock[i] == 0:
+							workingMemory.active_clock[i] = 1
+							workingMemory.active_pages[i] = temp_abs_name
+							c_pointer = i + 1
+							found = 1
+							break
+						elif workingMemory.active_clock[i] == 1:
+							workingMemory.active_clock[i] = 0
+					if c_pointer >= len(workingMemory.active_pages):
+						c_pointer = 0
+				if paging_mode == 'prepaging':
+					found = 0
+					while(found != 1):
+						for i in range(c_pointer, len(workingMemory.active_pages)):
+							if workingMemory.active_clock[i] == 0:
+								workingMemory.active_clock[i] = 1
+								workingMemory.active_pages[i] = temp_abs_next
+								c_pointer = i + 1
+								found = 1
+								break
+							elif workingMemory.active_clock[i] == 1:
+								workingMemory.active_clock[i] = 0
+						if c_pointer >= len(workingMemory.active_pages):
+							c_pointer = 0
+
 			elif algorithm == 'FIFO':
 				oldest = workingMemory.active_times.index(min(workingMemory.active_times))
 				workingMemory.active_pages[oldest] = temp_abs_name
 				workingMemory.active_times[oldest] = datetime.datetime.now()
+				if paging_mode == 'prepaging':
+					oldest = workingMemory.active_times.index(min(workingMemory.active_times))
+					workingMemory.active_pages[oldest] = temp_abs_next
+					workingMemory.active_times[oldest] = datetime.datetime.now()
 
 print('\n{0} - {1} = {2} page faults\n'.format(algorithm, paging_mode, page_faults))
